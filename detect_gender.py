@@ -44,22 +44,9 @@ for idx, f in enumerate(face):
     idx = np.argmax(conf)
     label = classes[idx]
 
-    label_conf = "{}: {:.2f}%".format(label, conf[idx] * 100)
-
-    Y = startY - 10 if startY - 10 > 10 else startY + 10
-
-#    cv2.putText(image, label, (startX, Y),  cv2.FONT_HERSHEY_SIMPLEX,
-#                0.7, (0, 255, 0), 2)
-
 if label == 'man':
     cv2.imwrite('male_'+args.image,image)
 else:
     cv2.imwrite('female_'+args.image,image)
-"""
-cv2.imshow("gender detection", image)
-           
-cv2.waitKey()
 
-cv2.imwrite("gender_detection.jpg", image)
-"""
 cv2.destroyAllWindows()
