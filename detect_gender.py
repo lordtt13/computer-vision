@@ -7,8 +7,7 @@ import cvlib as cv
 import os
 
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required=True,
-	help="path to input image")
+ap.add_argument("-i", "--image", required=True, help="path to input image")
 args = ap.parse_args()
 
 image = cv2.imread(args.image)
@@ -17,11 +16,11 @@ if image is None:
     print("Could not read input image")
     exit()
 
-model = load_model("gender_detection.model")
+# model = load_model("gender_detection.model")
 
 face, confidence = cv.detect_face(image)
 
-classes = ['man','woman']
+# classes = ['man','woman']
 
 for idx, f in enumerate(face):
        
@@ -36,17 +35,20 @@ for idx, f in enumerate(face):
     face_crop = face_crop.astype("float") / 255.0
     face_crop = img_to_array(face_crop)
     face_crop = np.expand_dims(face_crop, axis=0)
+    # cv2.imwrite(args.image, face_crop)
 
-    conf = model.predict(face_crop)[0]
-    print(conf)
-    print(classes)
+    # conf = model.predict(face_crop)[0]
+    # print(conf)
+    # print(classes)
 
-    idx = np.argmax(conf)
-    label = classes[idx]
+    # idx = np.argmax(conf)
+    # label = classes[idx]
 
-if label == 'man':
-    cv2.imwrite('male_'+args.image,image)
-else:
-    cv2.imwrite('female_'+args.image,image)
 
+# if label == 'man':
+#     cv2.imwrite('male_'+args.image,image)
+# else:
+#     cv2.imwrite('female_'+args.image,image)
+
+cv2.imwrite(args.image,image)
 cv2.destroyAllWindows()

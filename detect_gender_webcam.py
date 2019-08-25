@@ -3,8 +3,9 @@ from keras.models import load_model
 import numpy as np
 import cv2
 import cvlib as cv
+import matplotlib.pyplot as plt
                      
-model = load_model("gender_detection.model")
+# model = load_model("gender_detection.model")
 
 webcam = cv2.VideoCapture(0)
 
@@ -12,7 +13,7 @@ if not webcam.isOpened():
     print("Could not open webcam")
     exit()
     
-classes = ['man','woman']
+# classes = ['man','woman']
 
 while webcam.isOpened():
 
@@ -44,24 +45,27 @@ while webcam.isOpened():
         face_crop = img_to_array(face_crop)
         face_crop = np.expand_dims(face_crop, axis=0)
 
-        conf = model.predict(face_crop)[0]
-        print(conf)
-        print(classes)
+        # conf = model.predict(face_crop)[0]
+        # print(conf)
+        # print(classes)
 
-        idx = np.argmax(conf)
-        label = classes[idx]
-
-        label = "{}: {:.2f}%".format(label, conf[idx] * 100)
+        # idx = np.argmax(conf)
+        # label = classes[idx]
+        #
+        # label = "{}: {:.2f}%".format(label, conf[idx] * 100)
 
         Y = startY - 10 if startY - 10 > 10 else startY + 10
 
-        cv2.putText(frame, label, (startX, Y),  cv2.FONT_HERSHEY_SIMPLEX,
-                    0.7, (0, 255, 0), 2)
+        # cv2.putText(frame, (startX, Y),  cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
 
     cv2.imshow("gender detection", frame)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    # plt.imshow(frame, cmap='gray', interpolation='bicubic')
+    # plt.xticks([]), plt.yticks([])  # to hide tick values on X and Y axis
+    # plt.show()
+
+    if cv2.waitKey(0) & 0xFF == ord('q'):
         break
 
 webcam.release()
-cv2.destroyAllWindows()
+# cv2.destroyAllWindows()
