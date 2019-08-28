@@ -8,7 +8,12 @@
 - smallervggnet         - Small VGG Net Model Architecture
 - train                 - Builder Script
 
-#### Trained
+## Facial Recognition
+- data_generator        - Script which generates pictures using burst mode through camera
+- Training              - Training for similarity using LBPH Recognizer
+- main                  - Main App which gives similarity metric
+
+## Trained
 > Built on easily availaible datasets and images generated from OpenVINO Toolkit Models
 
 - build_imfdb            - Build Database Script
@@ -17,9 +22,9 @@
 - smallvggnet            - optimized Model Build
 - train_model            - Training Scipt for Model with multiple outputs
 
-#### Human Detector
+## Human Detector
 > Built on imageai library with RetinaNet,YoloV3
 
-- human_detector              - Human Detector on pictures
-- human_detector_pic_resnet50 - Same as above but with Model Loader Changed 
-- human_detector_self         - Detector on vid frames
+- hum_detector              - Human Detector on pictures
+- hum_detector_pic_resnet50 - Same as above but with Model Loader Changed 
+- hum_detector_self         - Detector on vid frames
