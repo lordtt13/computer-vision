@@ -6,14 +6,16 @@ Created on Sat Sep  7 13:15:02 2019
 """
 import cv2
 import cvlib as cv
+import json
 import numpy as np
-from keras.models import load_model
+import init as j
 from keras.preprocessing.image import img_to_array
 
-model = load_model('opt_model.h5')
+model,graph = j.init()
 
-def integrator(image):
+def integrator(image, model = model):
     image = cv2.imread(image)
+    image = cv2.resize(image,(1024,1024))
     face, confidence = cv.detect_face(image)
     
     l = []
@@ -28,16 +30,22 @@ def integrator(image):
         face_crop = face_crop.astype("float") / 255.0
         face_crop = img_to_array(face_crop)
         face_crop = np.expand_dims(face_crop, axis=0)
-    
-        tags = model.predict(face_crop)
+        global graph
+        with graph.as_default():
+            tags = model.predict(face_crop)
         if tags[0] > 0.5:
-            case = {'Gender':'Male','Age':int(np.rint(tags[1]))}
+            case = {'Gender':'Male','Age':int(np.ceil(tags[1]))}
         else:
-            case = {'Gender':'Female','Age':int(np.rint(tags[1]))}
+            case = {'Gender':'Female','Age':int(np.ceil(tags[1]))}
 
         
         l.append(case)
         
     return l
-    
-print(integrator('..//download.jpeg'))
+
+def beautify(l):
+    string = ''
+    for i in l:
+        string += json.dumps(i)
+        
+    return string
