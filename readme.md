@@ -22,6 +22,7 @@
 - SMALL_VGG_NET          - Initial Model Build
 - smallvggnet            - optimized Model Build
 - train_model            - Training Scipt for Model with multiple outputs
+- init                   - Model,Graph Initializer
 
 ## Human Detector
 > Built on imageai library with RetinaNet,YoloV3
