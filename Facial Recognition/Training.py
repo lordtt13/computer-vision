@@ -14,12 +14,11 @@ import argparse
 ##============ Constructing the Argument Parser ==================##
 parser = argparse.ArgumentParser()
 parser.add_argument("-p","--path", required = True, help = "Path of Images and Labels")
-parser.add_argument("-x","--xmlpath", requred = True, help = "Path of the xml file for CascadeClassifier")
 args = vars(parser.parse_args())
 ##================================================================##
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-detector = cv2.CascadeClassifier(args["xmlpath"])
+detector = cv2.CascadeClassifier('haarcascade_frontalface_alt2.xml')
 
 def getImagesAndLabels(path):
     imagePaths = [os.path.join(path,f) for f in os.listdir(path)]     
