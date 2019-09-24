@@ -23,6 +23,12 @@
 - smallvggnet            - optimized Model Build
 - train_model            - Training Scipt for Model with multiple outputs
 - init                   - Model,Graph Initializer
+- convertor              - .svg to .png convertor
+- deploy.prototxt        - caffemodel specs
+- gen                    - qrcode generator
+- integrator             - Model(s) integrator
+- new_face_detection     - Script for GUI Build and interface
+- res10_300x300_ssd      - CaffeModel
 
 ## Human Detector
 > Built on imageai library with RetinaNet,YoloV3
