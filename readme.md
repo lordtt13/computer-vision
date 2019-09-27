@@ -29,6 +29,8 @@
 - integrator             - Model(s) integrator
 - new_face_detection     - Script for GUI Build and interface
 - res10_300x300_ssd      - CaffeModel
+- new_model              - Model with OpenVINO Trainers
+- xception               - Xception Net with IMFDB Trainers
 
 ## Human Detector
 > Built on imageai library with RetinaNet,YoloV3
