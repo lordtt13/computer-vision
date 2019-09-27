@@ -1,6 +1,6 @@
-# CamCann CV Models
+# Computer Vision Models
 ## Description:
-> All models (optimized,pre-built and trained) for CamCann Pvt.Ltd. are listed here
+> All models (optimized,pre-built and trained) for my work are listed here
 
 ## Pre-Built
 - detect_gender          - CLI for gender detection on static 2-D image
