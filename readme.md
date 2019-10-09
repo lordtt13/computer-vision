@@ -8,6 +8,7 @@
 - gender_detect_webccam  - CLI for gender detection on video frames
 - smallervggnet          - Small VGG Net Model Architecture
 - train                  - Builder Script
+- Age_Gender_Pre_Built   - Based on VGG16 Age Gender Module Built 
 
 ## Facial Recognition
 - data_generator        - Script which generates pictures using burst mode through camera
@@ -33,6 +34,7 @@
 - xception               - Xception Net with IMFDB Trainers
 - Age_Gender_Continous   - Age Gender Module (Densenet121) with Continous Age 
 - Age_Gender_Categorical - Age Gender Module (Densenet121) with Softmax Ages
+- Age_Gender_One_Hot     - Age Gender Module (Densenet121) with One Hot Ages
 
 ## Human Detector
 > Built on imageai library with RetinaNet,YoloV3

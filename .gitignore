@@ -4,3 +4,5 @@ download.jpeg
 /Human Detector/*.h5
 /Facial Recognition/Dataset
 /imfdb_dataset
+/Pre Built/*.h5
+/Trained/base_model.h5
