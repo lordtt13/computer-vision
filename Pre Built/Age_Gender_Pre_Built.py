@@ -5,8 +5,6 @@ Created on Wed Oct  9 18:39:33 2019
 @author: ADMIN
 """
 
-#Documentation: https://sefiks.com/2019/02/13/apparent-age-and-gender-prediction-in-keras/
-
 import numpy as np
 import cv2
 from keras.models import Model, Sequential
@@ -19,17 +17,16 @@ from keras.models import model_from_json
 import matplotlib.pyplot as plt
 from os import listdir
 
-#-----------------------
-#you can find male and female icons here: https://github.com/serengil/tensorflow-101/tree/master/dataset
+enableGenderIcons = False
 
-enableGenderIcons = True
-
+"""
 male_icon = cv2.imread("male.jpg")
 male_icon = cv2.resize(male_icon, (40, 40))
 
 female_icon = cv2.imread("female.jpg")
 female_icon = cv2.resize(female_icon, (40, 40))
-#-----------------------
+
+"""
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
@@ -98,7 +95,6 @@ def ageModel():
 	
 	age_model = Model(inputs=model.input, outputs=base_model_output)
 	
-	#you can find the pre-trained weights for age prediction here: https://drive.google.com/file/d/1YCox_4kJ-BYeXq27uUbasu--yz28zUMV/view?usp=sharing
 	age_model.load_weights("age_model_weights.h5")
 	
 	return age_model
@@ -113,7 +109,6 @@ def genderModel():
 
 	gender_model = Model(inputs=model.input, outputs=base_model_output)
 	
-	#you can find the pre-trained weights for gender prediction here: https://drive.google.com/file/d/1wUXRVlbsni2FN9-jkS_f4UTUrm1bRLyk/view?usp=sharing
 	gender_model.load_weights("gender_model_weights.h5")
 	
 	return gender_model
@@ -121,12 +116,10 @@ def genderModel():
 age_model = ageModel()
 gender_model = genderModel()
 
-#age model has 101 outputs and its outputs will be multiplied by its index label. sum will be apparent age
 output_indexes = np.array([i for i in range(0, 101)])
 
-#------------------------
 
-cap = cv2.VideoCapture(0) #capture webcam
+cap = cv2.VideoCapture(0) 
 
 while(True):
 	ret, img = cap.read()
@@ -155,14 +148,12 @@ while(True):
 				print("detected face has no margin")
 			
 			try:
-				#vgg-face expects inputs (224, 224, 3)
 				detected_face = cv2.resize(detected_face, (224, 224))
 				
 				img_pixels = image.img_to_array(detected_face)
 				img_pixels = np.expand_dims(img_pixels, axis = 0)
 				img_pixels /= 255
 				
-				#find out age and gender
 				age_distributions = age_model.predict(img_pixels)
 				apparent_age = str(int(np.floor(np.sum(age_distributions * output_indexes, axis = 1))[0]))
 				
@@ -179,9 +170,9 @@ while(True):
 				cv2.drawContours(img, [triangle_cnt], 0, info_box_color, -1)
 				cv2.rectangle(img,(x+int(w/2)-50,y-20),(x+int(w/2)+50,y-90),info_box_color,cv2.FILLED)
 				
-				#labels for age and gender
 				cv2.putText(img, apparent_age, (x+int(w/2), y - 45), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 111, 255), 2)
-				
+                cv2.putText(img, gender, (x+int(w/2)-42, y - 45), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 111, 255), 2)
+				"""
 				if enableGenderIcons:
 					if gender == 'M': gender_icon = male_icon
 					else: gender_icon = female_icon
@@ -189,15 +180,14 @@ while(True):
 					img[y-75:y-75+male_icon.shape[0], x+int(w/2)-45:x+int(w/2)-45+male_icon.shape[1]] = gender_icon
 				else:
 					cv2.putText(img, gender, (x+int(w/2)-42, y - 45), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 111, 255), 2)
-				
+				"""
 			except Exception as e:
 				print("exception",str(e))
 			
 	cv2.imshow('img',img)
 	
-	if cv2.waitKey(1) & 0xFF == ord('q'): #press q to quit
+	if cv2.waitKey(1) & 0xFF == ord('q'): 
 		break
-	
-#kill open cv things		
+		
 cap.release()
 cv2.destroyAllWindows()
