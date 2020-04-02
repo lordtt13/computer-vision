@@ -1,8 +1,22 @@
+*ipynb_checkpoints
+*__pycache__
+
+# Datasets Skipped
 /CamCann_Dataset
-download.jpeg
-/Human Detector/*.model
-/Human Detector/*.h5
+/imfdb-dataset
 /Facial Recognition/Dataset
-/imfdb_dataset
-/Pre Built/*.h5
-/Trained/base_model.h5
+*.jpeg
+*.png
+*.jpg
+*.csv
+*.txt
+
+
+# Model Binaries Skipped
+*.h5
+*.hd5
+*.model
+
+# Other Binaries Skipped
+*.pickle
+*.pkl
